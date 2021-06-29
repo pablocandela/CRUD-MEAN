@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-4">
+        <form  #employeeForm = "ngForm" (ngSubmit)="addEmployee(employeeForm)">
+            <input type="hidden" name="_id" [(ngModel)] = "employeeService.selectedEmployee._id">
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" name="name" [(ngModel)] = "employeeService.selectedEmployee.name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Oficina</label>
+                <input type="number" class="form-control" id="office" name="office" [(ngModel)] = "employeeService.selectedEmployee.office">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Posición</label>
+                <input type="text" class="form-control" id="position" name="position" [(ngModel)] = "employeeService.selectedEmployee.position">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Salario</label>
+                <input type="number" class="form-control" id="salary" name="salary" [(ngModel)] = "employeeService.selectedEmployee.salary">
+            </div>
+            <button type="button" class="btn btn-secondary" (click)="formReset(employeeForm)">Limpiar</button>
+            <button type="submit" class="btn btn-primary" >Guardar</button>
+        </form>
+    </div>
+    <div class="col-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Oficina</th>
+                    <th scope="col">Posición</th>
+                    <th scope="col">Salario</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody *ngFor = "let employee of employeeService.employees">
+                <tr>
+                    <th scope="row">{{ employee.name }}</th>
+                    <td>{{ employee.office }}</td>
+                    <td>{{ employee.position }}</td>
+                    <td>{{ employee.salary }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" (click)="editEmployee(employee)" >Editar</button>
+                        <button class="btn btn-danger btn-sm" (click)="deleteEmployee(employee._id)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
